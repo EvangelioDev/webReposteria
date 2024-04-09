@@ -13,6 +13,7 @@ html{
 }
 body{
     font-size: 1.6em;
+    overflow-x: hidden;
 }
 
 *, *::after, *::before{
@@ -32,7 +33,19 @@ h3, p, a{
     font-family: var(--parrafos);
 }
 .container-nav{
+    position: relative;
     background-color: var(--oscuro);
+    z-index: 5;
+}
+
+.back{
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, .5);
+    z-index: 4;
 }
 /* contenido de navegacion */
 .content-nav{
@@ -49,12 +62,34 @@ h3, p, a{
 }
 .nav-menu a{
     text-decoration: none;
-    font-size: 2rem;
+    font-size: 2.2rem;
     padding: 1rem;
     display: block;
     transition: color .3s ease-in-out;
+    text-align: center;
+    padding-left: 4rem;
 }
 
+@media (min-width: 768px) {
+    .nav-menu a{
+        text-align: left;
+        padding-left: 1rem;
+    }
+    
+}
+
+
+
+@keyframes slide{
+    /* 0% para la posicion inicial del elemento */
+    0%{
+        transform: translateX(100%);
+    }
+    /* 100% para la posicion final del elemento */
+    100%{
+        transform: translateX(0);
+    }
+}
 .nav-menu a:first-of-type{
     margin-top: 4rem;
 }
@@ -65,14 +100,29 @@ h3, p, a{
 .nav-menu a:nth-child(odd):hover{
     color: var(--verde);
 }
+.btn-close{
+    font-size: 3rem;
+    font-weight: bold;
+    color: var(--blanco);
+    position: absolute;
+    top:0;
+    right: 50px;
+    user-select: none;
+}
+.btn-close:hover{
+    cursor: pointer;
+}
 .nav-menu {
+    /* absolute me habilita lo atributo top, right, bottom, left */
     position: absolute;
     top: 0;
     right: 0;
     bottom: 0;
     padding: 3rem 4rem;
     width: 40rem;
+    height: 100vh;
     background-color: var(--oscuro);
+    animation: slide .5s ease-in-out;
 }
 
 .hidden
@@ -95,8 +145,45 @@ h3, p, a{
     height: .4rem;
     margin-bottom: .5rem;
 }
-.btn-nav{
+.btn-nav:hover{
     cursor: pointer;
 }
 
 
+/* SLIDER */
+
+video{
+    width: 100%;
+    height: 100%;
+}
+
+.content-header
+{
+    position: relative;
+}
+.content-header::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, .5);
+}
+.title-header{
+    position: absolute;
+    z-index: 2;
+    width: 100%;
+    height: 80%;
+    display: flex;
+    /* cuando de utiliza la propiedad flex-direction : colum se invierte la alineaccion justify-content y alig-items*/
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center;
+
+}
+
+.title-header h2{
+    color: var(--blanco);
+    font-size: 6.5rem;
+}
